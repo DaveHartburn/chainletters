@@ -3,7 +3,9 @@ Scripts and utils for a popular word game. Add, remove or change a single charac
 
 For example:
 *Add some examples here*
-  
+
+*See section on Database create and word loading for how to change the word list*
+
 This leads to a number of questions such as:
  - How many unique words are there which can not be changed to any other word?
  - What is the longest chain of words which can be made, without repeats?
@@ -17,7 +19,7 @@ There are three stages to this project:
  2. Processing of the word list to find links between words
  3. Data production. Answering all the interesting questions such as those above
 
-## Database set up and word loading
+## Database install and set up
 
 Install MySQL server as appropriate for your operating system. See https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/
 
@@ -42,3 +44,19 @@ mysql -h localhost -u clet_rw -p chainletters
 show tables;
 ```
 This should allow a connection and not show any tables.
+
+## Database create and word loading
+
+The word list used is located in dbCreate/wordlist, edit this as you see fit. It contains 133,145 British English words generated from the Ubuntu dictionaries, see https://manpages.ubuntu.com/manpages/focal/man5/british-english-large.5.html
+
+If you wish to regenerate this list, the following was performed on an Ubuntu system. It filters out all the words with 's on the end, and converts all words to lower case.
+```
+cd dbCreate
+sudo apt install wbritish-large
+grep -v "'s" /usr/share/dict/british-english-large | tr [A-Z] [a-z] > wordlist
+```
+
+Create the database by running the python script:
+```
+python createDB.py
+```
