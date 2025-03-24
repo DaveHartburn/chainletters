@@ -47,14 +47,15 @@ This should allow a connection and not show any tables.
 
 ## Database create and word loading
 
-The word list used is located in dbCreate/wordlist, edit this as you see fit. It contains 133,145 British English words generated from the Ubuntu dictionaries, see https://manpages.ubuntu.com/manpages/focal/man5/british-english-large.5.html
+The word list used is located in dbCreate/wordlist, edit this as you see fit. It contains 147,789 British English words generated from the GitHub project https://github.com/cybrkyd/british-english-language-tools/tree/main/british-english-words
 
 If you wish to regenerate this list, the following was performed on an Ubuntu system. It filters out all the words with 's on the end, and converts all words to lower case.
 ```
-cd dbCreate
-sudo apt install wbritish-large
-grep -v "'s" /usr/share/dict/british-english-large | tr [A-Z] [a-z] > wordlist
+wget https://raw.githubusercontent.com/cybrkyd/british-english-language-tools/refs/heads/main/british-english-words/british-english-words/en-GB-words
+grep -r '^[a-zA-Z]*$' en-GB-words | tr [A-Z] [a-z] | sort -u > wordlist
 ```
+The latter part filters out words with various types of punctuation or numbers, e.g. 'AK47' or 'walkie-talkie' as these do not fit the rules of the game.
+
 
 Create the database by running the python script:
 ```
