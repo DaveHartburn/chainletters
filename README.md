@@ -17,6 +17,15 @@ There are three stages to this project:
  2. Processing of the word list to find links between words
  3. Data production. Answering all the interesting questions such as those above
 
+## Prerequisites
+Python 3
+Python 3 MySQL connector
+```
+python -m pip install mysql-connector-python
+or
+sudo apt install python3-mysql.connector
+```
+
 ## Database set up and word loading
 
 Install MySQL server as appropriate for your operating system. See https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/
@@ -34,7 +43,13 @@ GRANT CREATE, ALTER, DROP, INSERT, UPDATE, DELETE, SELECT on chainletters.* TO '
 exit
 ```
 
-Change dbPasswords.params to contain your username and password.
+Change dbPasswords.params to contain your username and password. Optionally you can add add parameters to change the database name and the server, e.g:
+```
+username=clet_rw
+password=badPassword
+host=192.168.1.10
+dbname=mychain
+```
 
 Testing:
 ```
