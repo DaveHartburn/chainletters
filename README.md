@@ -69,10 +69,16 @@ If you wish to regenerate this list, the following was performed on an Ubuntu sy
 wget https://raw.githubusercontent.com/cybrkyd/british-english-language-tools/refs/heads/main/british-english-words/british-english-words/en-GB-words
 grep -r '^[a-zA-Z]*$' en-GB-words | tr [A-Z] [a-z] | sort -u > wordlist
 ```
-The latter part filters out words with various types of punctuation or numbers, e.g. 'AK47' or 'walkie-talkie' as these do not fit the rules of the game.
+The latter part filters out words with various types of punctuation or numbers, e.g. 'AK47' or 'walkie-talkie' as these do not fit the rules of the game. There are acronyms in this list and it also included every letter in the alphabet as a single character. I manually removed all but 'a' and 'i'.
 
 
 Create the database by running the python script:
 ```
 python createDB.py
 ```
+
+## Processing links
+
+Once loaded, links need to be found between words. Run `python processLinks.py`. This will take the next word from the word list which does not have the 'processed' flag set to True, and perform a search to find relationships.
+
+On a AWS server with **SPEC**, over a 10 second period, it processed 17 words. 147,765 at this rate gives a processing runtime of 86,920 seconds, which is 1448 minutes or just over a day to run.
